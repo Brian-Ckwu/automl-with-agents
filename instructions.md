@@ -61,11 +61,11 @@ When the experiment is done, run `uv run evaluate.py --predictions_csv experimen
 
 Summarize the findings and results of the experiment in `experiments/exp_<exp_no.>/summary.md`. The summary should be within 3 sentences. Also, put the script for loading the best checkpoint and making predictions on a given dataset (passed as a CLI argument, e.g., `data/test_inputs.csv`) in `experiments/exp_<exp_no.>/predict.py`. It should be a standalone script that can be run independently.
 
-Then, commit directly to the current branch with messages describing the core idea and the results. After committing, log the results (including the commit hash) to `results.tsv` (tab-separated, this file is deliberately ignored by git).
+Then, commit directly to the current branch with messages describing the core idea and the results. Note that you ONLY need to commit a single file `train.py` after each experiment. After committing, log the results (including the commit hash) in a new row to `results.tsv` (tab-separated, this file is deliberately ignored by git).
 
 The TSV has a header row and 6 columns:
 ```
-exp_no.	git_commit	core_idea	test_score	is_current_best	remarks
+exp_no.	git_commit	core_idea	test_score	is_running_best	remarks
 ```
 
 Meaning of each column:
@@ -73,12 +73,12 @@ Meaning of each column:
 2. `git_commit`: The git commit hash (shortened to 7 characters) of the experiment.
 3. `core_idea`: The core idea of the experiment. Should be a single sentence.
 4. `test_score`: The test score of the experiment (formatted as a float with 4 decimal places: 0.XXXX). Use 0.0000 for crashes.
-5. `is_current_best`: Whether the test score is the current best test score.
+5. `is_running_best`: Whether the test score is the running best test score.
 6. `remarks`: Findings and thoughts about the experiment. Should be within 3 sentences.
 
 Example:
 ```
-exp_no.	git_commit	core_idea	test_score	is_current_best	remarks
+exp_no.	git_commit	core_idea	test_score	is_running_best	remarks
 1	a1b2c3d	Simple baseline: feature engineering + logistic regression	0.8045	True	The first experiment successfully established a baseline performance.
 2	e5f6g7h	Added polynomial features and switched to gradient boosting	0.8213	True	Gradient boosting with degree-2 polynomial features improved score by ~1.7pp; overfitting was not observed on validation.
 3	i9j0k1l	Hyperparameter tuning via random search on learning rate and max depth	0.8198	False	Tuning did not improve over exp 2; best found params matched defaults closely, suggesting the search space was too narrow.
