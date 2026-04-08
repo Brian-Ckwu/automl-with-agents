@@ -90,3 +90,4 @@ Depending on the initial prompt given by the human, initiate the next experiment
 
 ## What You Should Never Do
 - You should never edit `instructions.md`, `evaluate.py`, `data/overview.md`, `data/train.csv`, `data/test_inputs.csv`, or `data/test_labels.csv`.
+- You should never rely on peculiarities from `data/test_inputs.csv`, `data/test_labels.csv`, or `evaluate.py` for training. A separate private test set (not included in this repo) will be used for final evaluation. Optimize for genuine generalization.
